@@ -143,6 +143,7 @@ message StorageBackend {
         Local local = 2;
         S3 s3 = 3;
         GCS gcs = 4;
+	CloudDynamic cloud_dynamic = 5;
     }
 }
 
@@ -185,7 +186,26 @@ message GCS {
     // You can get one from https://console.cloud.google.com/apis/credentials, and
     // copy the content, set it as string here.
     string credentials_blob = 6;
+    string host = 7; // alternative to endpoint, just specify the host
 }
+
+// S3 and GCS can be transitioned to use this
+message Bucket {
+    string endpoint = 1; // use a different endpoint (host + url)
+    string host = 2; // use a different host
+    string region = 3;
+    string bucket = 4;
+    string prefix = 5;
+    string storage_class = 6;
+}
+
+// CloudDynamic allows adding new fields without changing protobuf definitions
+message CloudDynamic {
+    Bucket bucket = 1;
+    string provider_name = 2;
+    map<string, string> attrs = 3;
+}
+
 
 message BackupResponse {
     Error error = 1;
