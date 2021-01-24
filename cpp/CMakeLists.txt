@@ -19,3 +19,6 @@ list(APPEND generated_files ${__tmp})
 add_library(kvproto ${generated_files})
 include_directories(${CMAKE_CURRENT_LIST_DIR}/kvproto)
 target_include_directories(kvproto PUBLIC ./)
+
+find_package(Protobuf REQUIRED)
+include_directories(${PROTOBUF_INCLUDE_DIRS})
