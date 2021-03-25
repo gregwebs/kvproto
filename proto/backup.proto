@@ -217,3 +217,23 @@ message BackupResponse {
 service Backup {
     rpc backup(BackupRequest) returns (stream BackupResponse) {}
 }
+
+message ExternalStorageStartRequest {
+    StorageBackend storage_backend = 1;
+}
+
+message ExternalStorageStartResponse {
+    string storage_id = 1;
+}
+
+message ExternalStorageFinishRequest {
+    string storage_id = 1;
+}
+
+message ExternalStorageFinishResponse {
+}
+
+service ExternalStorage {
+    rpc start(ExternalStorageStartRequest) returns (ExternalStorageStartResponse) {}
+    rpc finish(ExternalStorageFinishRequest) returns (ExternalStorageFinishResponse) {}
+}
