@@ -215,3 +215,27 @@ message BackupResponse {
 service Backup {
     rpc backup(BackupRequest) returns (stream BackupResponse) {}
 }
+
+message ExternalStorageRestoreRequest {
+    StorageBackend storage_backend = 1;
+    string object_name = 2;
+    string restore_name = 3;
+    uint64 content_length = 4;
+}
+
+message ExternalStorageRestoreResponse {
+}
+
+message ExternalStorageWriteRequest {
+    StorageBackend storage_backend = 1;
+    string object_name = 2;
+    uint64 content_length = 3;
+}
+
+message ExternalStorageWriteResponse {
+}
+
+service ExternalStorage {
+    rpc restore(ExternalStorageRestoreRequest) returns (ExternalStorageRestoreResponse) {}
+    rpc write(ExternalStorageWriteRequest) returns (ExternalStorageWriteResponse) {}
+}
